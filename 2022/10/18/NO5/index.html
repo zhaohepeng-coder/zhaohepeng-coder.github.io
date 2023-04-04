@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>并查集 | Hexo</title>
+  <meta name="keywords" content=" 模板 , 并查集 ">
+  <meta name="description" content="并查集 | Hexo">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="快速幂🚀介绍 快速幂指的是在不进行调用语言外部函数的情况下，自己完成幂运算，一般的幂运算在碰到数据量比较大时，会出现时间复杂度过高的情况，因为乘法是很耗费运算时间的。所以有了快速幂的算法。快速幂可用于多种幂运算的场景。帮助降低时间复杂度。 快速幂有两种常见的算法，一种是递归法，一种是迭代法。  🎯递归法 pow(m,n),表示的是m的n次方。 先看几个例子：  令n&#x3D;64 ​       m-">
+<meta property="og:type" content="article">
+<meta property="og:title" content="快速幂">
+<meta property="og:url" content="https://www.example.com/2022/10/18/NO7/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="快速幂🚀介绍 快速幂指的是在不进行调用语言外部函数的情况下，自己完成幂运算，一般的幂运算在碰到数据量比较大时，会出现时间复杂度过高的情况，因为乘法是很耗费运算时间的。所以有了快速幂的算法。快速幂可用于多种幂运算的场景。帮助降低时间复杂度。 快速幂有两种常见的算法，一种是递归法，一种是迭代法。  🎯递归法 pow(m,n),表示的是m的n次方。 先看几个例子：  令n&#x3D;64 ​       m-">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-10-18T12:37:09.000Z">
+<meta property="article:modified_time" content="2022-10-19T15:33:54.275Z">
+<meta property="article:author" content="Mr.zhao">
+<meta property="article:tag" content="快速幂">
+<meta property="article:tag" content="递归">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.1.0" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.1.0" rel="stylesheet">
+
+<link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
+
+<script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="/js/titleTip.js?v=1.1.0" ></script>
+
+<script src="//cdn.jsdelivr.net/npm/highlightjs@9.16.2/highlight.pack.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/jquery.cookie@1.4.1/jquery.cookie.min.js" ></script>
+
+<script src="/js/iconfont.js?v=1.1.0" ></script>
+
+<meta name="generator" content="Hexo 5.4.2"></head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="">
+  <input class="theme_blog_path" value="">
+  <input id="theme_shortcut" value="true" />
+  <input id="theme_highlight_on" value="true" />
+  <input id="theme_code_copy" value="true" />
+</div>
+
+
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/"
+   class="avatar_target">
+    <img class="avatar"
+         src="/img/avatar.jpg"/>
+</a>
+<div class="author">
+    <span>Mr.zhao</span>
+</div>
+
+<div class="icon">
+    
+        
+            <a title="rss"
+               href="/atom.xml"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-rss"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="github"
+               href="https://github.com/yelog"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-github"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="facebook"
+               href="https://www.facebook.com/faker.tops"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-facebook"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+    
+        
+    
+        
+            <a title="instagram"
+               href="https://www.facebook.com/faker.tops"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-instagram"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="reddit"
+               href="https://www.reddit.com/user/yelog/"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-reddit"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="weibo"
+               href="http://weibo.com/u/2307534817"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-weibo"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="jianshu"
+               href="https://www.jianshu.com/u/ff56736de7cf"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-jianshu"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="zhihu"
+               href="https://www.zhihu.com/peope/jaytp/activities"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-zhihu"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+    
+        
+            <a title="oschina"
+               href="https://my.oschina.ne/yelog"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-oschina"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+    
+        
+            <a title="email"
+               href="mailto:jaytp@qq.com"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-email"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="qq"
+               href="http://wpa.qq.com/msgrd?v=3&uin=1469062326@qq.com&site=qq&menu=yes"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-qq"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="kugou"
+               href="https://www.kugou.com/"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-kugou"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="neteasemusic"
+               href="https://music.163.com/#/user/home?id=88151013"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-neteasemusic"></use>
+                    </svg>
+                
+            </a>
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li>
+        <div class="all active" data-rel="All">All
+            
+                <small>(7)</small>
+            
+        </div>
+    </li>
+    
+        
+            
+        
+    
+        
+            
+                <li>
+                    <div data-rel="生活感悟">
+                        
+                        生活感悟
+                        <small>(1)</small>
+                        
+                    </div>
+                    
+                </li>
+            
+        
+    
+        
+            
+                <li>
+                    <div data-rel="算法集锦">
+                        <i class="fold iconfont icon-right"></i>
+                        
+                        算法集锦
+                        <small>(6)</small>
+                        
+                    </div>
+                    
+                        <ul class="sub hide">
+                            
+                                <li>
+                                    <div data-rel="算法集锦<--->算法题">
+                                        
+                                        算法题
+                                        
+                                            <small>(3
+                                                )</small>
+                                        
+                                    </div>
+                                    
+                                </li>
+                            
+                                <li>
+                                    <div data-rel="算法集锦<--->算法模板">
+                                        
+                                        算法模板
+                                        
+                                            <small>(3
+                                                )</small>
+                                        
+                                    </div>
+                                    
+                                </li>
+                            
+                        </ul>
+                    
+                </li>
+            
+        
+    
+        
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+        
+            
+            
+            
+    </div>
+    <div>
+        
+            <a class="about  hasFriend  site_url"
+               
+               href="/about">About</a>
+        
+        <a style="width: 50%"
+                
+                                           class="friends">Friends</a>
+        
+    </div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="7">
+
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        Links
+        <i class="iconfont icon-left"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="/null">阁</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <div class="right-top">
+        <div id="default-panel">
+            <i class="iconfont icon-search" data-title="搜索 快捷键 i"></i>
+            <div class="right-title">All</div>
+            <i class="iconfont icon-file-tree" data-title="切换到大纲视图 快捷键 w"></i>
+        </div>
+        <div id="search-panel">
+            <i class="iconfont icon-left" data-title="返回"></i>
+            <input id="local-search-input" autocomplete="off"/>
+            <label class="border-line" for="input"></label>
+            <i class="iconfont icon-case-sensitive" data-title="大小写敏感"></i>
+            <i class="iconfont icon-tag" data-title="标签"></i>
+        </div>
+        <div id="outline-panel" style="display: none">
+            <div class="right-title">大纲</div>
+            <i class="iconfont icon-list" data-title="切换到文章列表"></i>
+        </div>
+    </div>
+
+    <div class="tags-list">
+    <input id="tag-search" />
+    <div class="tag-wrapper">
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>并查集</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>递归</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>动态规划</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>快速幂</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>困难难度</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>邻接表</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>模板</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>前向星链图</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>数位dp</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>序列DP</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>学习</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>中等难度</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>字符串</a>
+            </li>
+        
+    </div>
+
+</div>
+
+    
+    <nav id="title-list-nav">
+        
+        
+        <a  class="All 算法集锦 算法题 "
+           href="/2022/10/18/NO7/"
+           data-tag="快速幂,递归"
+           data-author="" >
+            <span class="post-title" title="快速幂">快速幂</span>
+            <span class="post-date" title="2022-10-18 20:37:09">2022/10/18</span>
+        </a>
+        
+        
+        <a  class="All 算法集锦 算法模板 "
+           href="/2022/10/18/NO6/"
+           data-tag="模板,数位dp,动态规划"
+           data-author="" >
+            <span class="post-title" title="数位DP模板">数位DP模板</span>
+            <span class="post-date" title="2022-10-18 20:36:58">2022/10/18</span>
+        </a>
+        
+        
+        <a  class="All 算法集锦 算法模板 "
+           href="/2022/10/18/NO5/"
+           data-tag="模板,并查集"
+           data-author="" >
+            <span class="post-title" title="并查集">并查集</span>
+            <span class="post-date" title="2022-10-18 20:36:36">2022/10/18</span>
+        </a>
+        
+        
+        <a  class="All 算法集锦 算法模板 "
+           href="/2022/10/18/NO4/"
+           data-tag="模板,前向星链图,邻接表"
+           data-author="" >
+            <span class="post-title" title="二分图模板">二分图模板</span>
+            <span class="post-date" title="2022-10-18 20:36:14">2022/10/18</span>
+        </a>
+        
+        
+        <a  class="All 生活感悟 "
+           href="/2022/10/15/NO-3/"
+           data-tag="学习"
+           data-author="" >
+            <span class="post-title" title="整理生活和整理思维">整理生活和整理思维</span>
+            <span class="post-date" title="2022-10-15 10:10:17">2022/10/15</span>
+        </a>
+        
+        
+        <a  class="All 算法集锦 算法题 "
+           href="/2022/10/09/NO.1/"
+           data-tag="字符串,困难难度,序列DP"
+           data-author="" >
+            <span class="post-title" title="序列dp之940 不同的子序列II">序列dp之940 不同的子序列II</span>
+            <span class="post-date" title="2022-10-09 23:11:05">2022/10/09</span>
+        </a>
+        
+        
+        <a  class="All 算法集锦 算法题 "
+           href="/2022/10/09/NO2/"
+           data-tag="字符串,中等难度"
+           data-author="" >
+            <span class="post-title" title="856.括号的分数">856.括号的分数</span>
+            <span class="post-date" title="2022-10-09 17:01:26">2022/10/09</span>
+        </a>
+        
+        <div id="no-item-tips">
+
+        </div>
+    </nav>
+    <div id="outline-list">
+    </div>
+</div>
+
+    </div>
+    <div class="hide-list">
+        <div class="semicircle" data-title="切换全屏 快捷键 s">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div id="post">
+    <div class="pjax">
+        <article id="post-NO5" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">并查集</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a  data-rel="算法集锦">算法集锦</a> > 
+            
+            <a  data-rel="算法集锦&lt;---&gt;算法模板">算法模板</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color3">模板</a>
+            
+            <a class="color4">并查集</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+            Created At : <time class="date" title='Updated At: 2022-10-18 22:09:08'>2022-10-18 20:36</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        
+        <span id="busuanzi_container_page_pv">
+            Views 👀 :<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E5%B9%B6%E6%9F%A5%E9%9B%86%E4%BB%A3%E7%A0%81"><span class="toc-text">1.并查集代码</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-%E7%AE%80%E5%8D%95%E4%BB%A3%E7%A0%81"><span class="toc-text">1.1 简单代码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-size-%E4%BC%98%E5%8C%96%E4%BB%A3%E7%A0%81"><span class="toc-text">1.2 size 优化代码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-rank%E4%BC%98%E5%8C%96%E4%BB%A3%E7%A0%81"><span class="toc-text">1.3 rank优化代码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-4-%E8%B7%AF%E5%BE%84%E4%BC%98%E5%8C%96%E4%BB%A3%E7%A0%81"><span class="toc-text">1.4 路径优化代码</span></a></li></ol></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-6 i,
+    .toc-level-6 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1-并查集代码"><a href="#1-并查集代码" class="headerlink" title="1.并查集代码"></a>1.并查集代码</h1><p><a target="_blank" rel="noopener" href="https://www.runoob.com/data-structures/union-find-basic.html">具体原理</a></p>
+<h2 id="1-1-简单代码"><a href="#1-1-简单代码" class="headerlink" title="1.1 简单代码"></a>1.1 简单代码</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UnionFind2</span> &#123;</span><br><span class="line">    <span class="comment">// 我们的第二版Union-Find, 使用一个数组构建一棵指向父节点的树</span></span><br><span class="line">    <span class="comment">// parent[i]表示第一个元素所指向的父节点</span></span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span>[] parent;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> count;  <span class="comment">// 数据个数</span></span><br><span class="line">    <span class="comment">// 构造函数</span></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">UnionFind2</span><span class="params">(<span class="type">int</span> count)</span>&#123;</span><br><span class="line">        parent = <span class="keyword">new</span> <span class="title class_">int</span>[count];</span><br><span class="line">        <span class="built_in">this</span>.count = count;</span><br><span class="line">        <span class="comment">// 初始化, 每一个parent[i]指向自己, 表示每一个元素自己自成一个集合</span></span><br><span class="line">        <span class="keyword">for</span>( <span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span> ; i &lt; count ; i ++ )</span><br><span class="line">            parent[i] = i;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 查找过程, 查找元素p所对应的集合编号</span></span><br><span class="line">    <span class="comment">// O(h)复杂度, h为树的高度</span></span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> <span class="title function_">find</span><span class="params">(<span class="type">int</span> p)</span>&#123;</span><br><span class="line">        <span class="keyword">assert</span>( p &gt;= <span class="number">0</span> &amp;&amp; p &lt; count );</span><br><span class="line">        <span class="comment">// 不断去查询自己的父亲节点, 直到到达根节点</span></span><br><span class="line">        <span class="comment">// 根节点的特点: parent[p] == p</span></span><br><span class="line">        <span class="keyword">while</span>( p != parent[p] )</span><br><span class="line">            p = parent[p];</span><br><span class="line">        <span class="keyword">return</span> p;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 查看元素p和元素q是否所属一个集合</span></span><br><span class="line">    <span class="comment">// O(h)复杂度, h为树的高度</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">isConnected</span><span class="params">( <span class="type">int</span> p , <span class="type">int</span> q )</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> find(p) == find(q);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 合并元素p和元素q所属的集合</span></span><br><span class="line">    <span class="comment">// O(h)复杂度, h为树的高度</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">unionElements</span><span class="params">(<span class="type">int</span> p, <span class="type">int</span> q)</span>&#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">pRoot</span> <span class="operator">=</span> find(p);</span><br><span class="line">        <span class="type">int</span> <span class="variable">qRoot</span> <span class="operator">=</span> find(q);</span><br><span class="line">        <span class="keyword">if</span>( pRoot == qRoot )</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        parent[pRoot] = qRoot;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="1-2-size-优化代码"><a href="#1-2-size-优化代码" class="headerlink" title="1.2 size 优化代码"></a>1.2 size 优化代码</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UnionFind3</span> &#123;</span><br><span class="line">    <span class="comment">// parent[i]表示第一个元素所指向的父节点</span></span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span>[] parent;</span><br><span class="line">    <span class="comment">// sz[i]表示以i为根的集合中元素个数</span></span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span>[] sz;</span><br><span class="line">    <span class="comment">// 数据个数</span></span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> count;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 构造函数</span></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">UnionFind3</span><span class="params">(<span class="type">int</span> count)</span>&#123;</span><br><span class="line">        parent = <span class="keyword">new</span> <span class="title class_">int</span>[count];</span><br><span class="line">        sz = <span class="keyword">new</span> <span class="title class_">int</span>[count];</span><br><span class="line">        <span class="built_in">this</span>.count = count;</span><br><span class="line">        <span class="comment">// 初始化, 每一个parent[i]指向自己, 表示每一个元素自己自成一个集合</span></span><br><span class="line">        <span class="keyword">for</span>( <span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span> ; i &lt; count ; i ++ )&#123;</span><br><span class="line">            parent[i] = i;</span><br><span class="line">            sz[i] = <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 查找过程, 查找元素p所对应的集合编号</span></span><br><span class="line">    <span class="comment">// O(h)复杂度, h为树的高度</span></span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> <span class="title function_">find</span><span class="params">(<span class="type">int</span> p)</span>&#123;</span><br><span class="line">        <span class="keyword">assert</span>( p &gt;= <span class="number">0</span> &amp;&amp; p &lt; count );</span><br><span class="line">        <span class="comment">// 不断去查询自己的父亲节点, 直到到达根节点</span></span><br><span class="line">        <span class="comment">// 根节点的特点: parent[p] == p</span></span><br><span class="line">        <span class="keyword">while</span>( p != parent[p] )</span><br><span class="line">            p = parent[p];</span><br><span class="line">        <span class="keyword">return</span> p;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 查看元素p和元素q是否所属一个集合</span></span><br><span class="line">    <span class="comment">// O(h)复杂度, h为树的高度</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">isConnected</span><span class="params">( <span class="type">int</span> p , <span class="type">int</span> q )</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> find(p) == find(q);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 合并元素p和元素q所属的集合</span></span><br><span class="line">    <span class="comment">// O(h)复杂度, h为树的高度</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">unionElements</span><span class="params">(<span class="type">int</span> p, <span class="type">int</span> q)</span>&#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">pRoot</span> <span class="operator">=</span> find(p);</span><br><span class="line">        <span class="type">int</span> <span class="variable">qRoot</span> <span class="operator">=</span> find(q);</span><br><span class="line">        <span class="keyword">if</span>( pRoot == qRoot )</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        <span class="comment">// 根据两个元素所在树的元素个数不同判断合并方向</span></span><br><span class="line">        <span class="comment">// 将元素个数少的集合合并到元素个数多的集合上</span></span><br><span class="line">        <span class="keyword">if</span>( sz[pRoot] &lt; sz[qRoot] )&#123;</span><br><span class="line">            parent[pRoot] = qRoot;</span><br><span class="line">            sz[qRoot] += sz[pRoot];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            parent[qRoot] = pRoot;</span><br><span class="line">            sz[pRoot] += sz[qRoot];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="1-3-rank优化代码"><a href="#1-3-rank优化代码" class="headerlink" title="1.3 rank优化代码"></a>1.3 rank优化代码</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 基于rank的优化</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UnionFind4</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span>[] rank;   <span class="comment">// rank[i]表示以i为根的集合所表示的树的层数</span></span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span>[] parent; <span class="comment">// parent[i]表示第i个元素所指向的父节点</span></span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> count;    <span class="comment">// 数据个数</span></span><br><span class="line">    <span class="comment">// 构造函数</span></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">UnionFind4</span><span class="params">(<span class="type">int</span> count)</span>&#123;</span><br><span class="line">        rank = <span class="keyword">new</span> <span class="title class_">int</span>[count];</span><br><span class="line">        parent = <span class="keyword">new</span> <span class="title class_">int</span>[count];</span><br><span class="line">        <span class="built_in">this</span>.count = count;</span><br><span class="line">        <span class="comment">// 初始化, 每一个parent[i]指向自己, 表示每一个元素自己自成一个集合</span></span><br><span class="line">        <span class="keyword">for</span>( <span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span> ; i &lt; count ; i ++ )&#123;</span><br><span class="line">            parent[i] = i;</span><br><span class="line">            rank[i] = <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 查找过程, 查找元素p所对应的集合编号</span></span><br><span class="line">    <span class="comment">// O(h)复杂度, h为树的高度</span></span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> <span class="title function_">find</span><span class="params">(<span class="type">int</span> p)</span>&#123;</span><br><span class="line">        <span class="keyword">assert</span>( p &gt;= <span class="number">0</span> &amp;&amp; p &lt; count );</span><br><span class="line">        <span class="comment">// 不断去查询自己的父亲节点, 直到到达根节点</span></span><br><span class="line">        <span class="comment">// 根节点的特点: parent[p] == p</span></span><br><span class="line">        <span class="keyword">while</span>( p != parent[p] )</span><br><span class="line">            p = parent[p];</span><br><span class="line">        <span class="keyword">return</span> p;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 查看元素p和元素q是否所属一个集合</span></span><br><span class="line">    <span class="comment">// O(h)复杂度, h为树的高度</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">isConnected</span><span class="params">( <span class="type">int</span> p , <span class="type">int</span> q )</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> find(p) == find(q);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 合并元素p和元素q所属的集合</span></span><br><span class="line">    <span class="comment">// O(h)复杂度, h为树的高度</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">unionElements</span><span class="params">(<span class="type">int</span> p, <span class="type">int</span> q)</span>&#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">pRoot</span> <span class="operator">=</span> find(p);</span><br><span class="line">        <span class="type">int</span> <span class="variable">qRoot</span> <span class="operator">=</span> find(q);</span><br><span class="line">        <span class="keyword">if</span>( pRoot == qRoot )</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        <span class="keyword">if</span>( rank[pRoot] &lt; rank[qRoot] )&#123;</span><br><span class="line">            parent[pRoot] = qRoot;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>( rank[qRoot] &lt; rank[pRoot])&#123;</span><br><span class="line">            parent[qRoot] = pRoot;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123; <span class="comment">// rank[pRoot] == rank[qRoot]</span></span><br><span class="line">            parent[pRoot] = qRoot;</span><br><span class="line">            rank[qRoot] += <span class="number">1</span>;   <span class="comment">// 维护rank的值</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="1-4-路径优化代码"><a href="#1-4-路径优化代码" class="headerlink" title="1.4 路径优化代码"></a>1.4 路径优化代码</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UnionFind4</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span>[] rank;   <span class="comment">// rank[i]表示以i为根的集合所表示的树的层数</span></span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span>[] parent; <span class="comment">// parent[i]表示第i个元素所指向的父节点</span></span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> count;    <span class="comment">// 数据个数</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 构造函数</span></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">UnionFind4</span><span class="params">(<span class="type">int</span> count)</span>&#123;</span><br><span class="line">        rank = <span class="keyword">new</span> <span class="title class_">int</span>[count];</span><br><span class="line">        parent = <span class="keyword">new</span> <span class="title class_">int</span>[count];</span><br><span class="line">        <span class="built_in">this</span>.count = count;</span><br><span class="line">        <span class="comment">// 初始化, 每一个parent[i]指向自己, 表示每一个元素自己自成一个集合</span></span><br><span class="line">        <span class="keyword">for</span>( <span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span> ; i &lt; count ; i ++ )&#123;</span><br><span class="line">            parent[i] = i;</span><br><span class="line">            rank[i] = <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 查找过程, 查找元素p所对应的集合编号</span></span><br><span class="line">    <span class="comment">// O(h)复杂度, h为树的高度</span></span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> <span class="title function_">find</span><span class="params">(<span class="type">int</span> p)</span>&#123;</span><br><span class="line">        <span class="keyword">assert</span>( p &gt;= <span class="number">0</span> &amp;&amp; p &lt; count );</span><br><span class="line">        <span class="comment">// 不断去查询自己的父亲节点, 直到到达根节点</span></span><br><span class="line">        <span class="comment">// 根节点的特点: parent[p] == p</span></span><br><span class="line">        <span class="keyword">while</span>( p != parent[p] )</span><br><span class="line">            p = parent[p];</span><br><span class="line">        <span class="keyword">return</span> p;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//第二种路径压缩算法</span></span><br><span class="line">        <span class="comment">//if( p != parent[p] )</span></span><br><span class="line">        <span class="comment">//parent[p] = find( parent[p] );</span></span><br><span class="line">        <span class="comment">//return parent[p];</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 查看元素p和元素q是否所属一个集合</span></span><br><span class="line">    <span class="comment">// O(h)复杂度, h为树的高度</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">isConnected</span><span class="params">( <span class="type">int</span> p , <span class="type">int</span> q )</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> find(p) == find(q);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 合并元素p和元素q所属的集合</span></span><br><span class="line">    <span class="comment">// O(h)复杂度, h为树的高度</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">unionElements</span><span class="params">(<span class="type">int</span> p, <span class="type">int</span> q)</span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="type">int</span> <span class="variable">pRoot</span> <span class="operator">=</span> find(p);</span><br><span class="line">        <span class="type">int</span> <span class="variable">qRoot</span> <span class="operator">=</span> find(q);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>( pRoot == qRoot )</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>( rank[pRoot] &lt; rank[qRoot] )&#123;</span><br><span class="line">            parent[pRoot] = qRoot;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>( rank[qRoot] &lt; rank[pRoot])&#123;</span><br><span class="line">            parent[qRoot] = pRoot;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123; <span class="comment">// rank[pRoot] == rank[qRoot]</span></span><br><span class="line">            parent[pRoot] = qRoot;</span><br><span class="line">            rank[qRoot] += <span class="number">1</span>;   <span class="comment">// 维护rank的值</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。 </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">💰</a>
+</p>
+
+
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">
+    ©2016-2022 Mir zhao
+</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close"  onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>Help us with donation</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">alipay</label></span><span><label><input type="radio" name="pay" value="weixin">weixin</label></span>
+    </div>
+</div>
+
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.1.0" ></script>
+
+<script src="/js/script.js?v=1.1.0" ></script>
+<script>
+    var img_resize = 'default';
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $("#post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+    .nav-right:before {
+        content: ' ';
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.3;
+        background: url("https://i.loli.net/2019/07/22/5d3521411f3f169375.png");
+        background-repeat: no-repeat;
+        background-position: 50% 0;
+        -ms-background-size: cover;
+        -o-background-size: cover;
+        -moz-background-size: cover;
+        -webkit-background-size: cover;
+        background-size: cover;
+    }
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>

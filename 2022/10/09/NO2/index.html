@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Hexo</title>
-  <meta name="keywords" content="">
-  <meta name="description" content="Hexo">
+  <title>856.括号的分数 | Hexo</title>
+  <meta name="keywords" content=" 字符串 , 中等难度 ">
+  <meta name="description" content="856.括号的分数 | Hexo">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="快速幂🚀介绍 快速幂指的是在不进行调用语言外部函数的情况下，自己完成幂运算，一般的幂运算在碰到数据量比较大时，会出现时间复杂度过高的情况，因为乘法是很耗费运算时间的。所以有了快速幂的算法。快速幂可用于多种幂运算的场景。帮助降低时间复杂度。 快速幂有两种常见的算法，一种是递归法，一种是迭代法。  🎯递归法 pow(m,n),表示的是m的n次方。 先看几个例子：  令n&#x3D;64 ​       m-">
 <meta property="og:type" content="article">
@@ -58,7 +58,7 @@
 
 
 <body>
-<aside class="nav mobile">
+<aside class="nav">
     <div class="nav-left">
         <a href="/"
    class="avatar_target">
@@ -518,12 +518,62 @@
         </div>
     </div>
 </aside>
-<div id="post" class="index">
+<div id="post">
     <div class="pjax">
-        <article class="index">
-            <div class="toc-ref">
+        <article id="post-NO2" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Why-Blog"><span class="toc-text">Why Blog</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%B9%E5%8D%9A%E5%AE%A2%E7%9A%84%E7%90%86%E8%A7%A3"><span class="toc-text">对博客的理解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E%E7%A0%81%E9%98%81"><span class="toc-text">关于码阁</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%9A%E5%AE%A2%E5%B9%B3%E5%8F%B0"><span class="toc-text">博客平台</span></a></li></ol></li></ol>
+        <h1 class="article-title">856.括号的分数</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a  data-rel="算法集锦">算法集锦</a> > 
+            
+            <a  data-rel="算法集锦&lt;---&gt;算法题">算法题</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color4">字符串</a>
+            
+            <a class="color5">中等难度</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+            Created At : <time class="date" title='Updated At: 2022-10-18 22:09:09'>2022-10-09 17:01</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        
+        <span id="busuanzi_container_page_pv">
+            Views 👀 :<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#856-%E6%8B%AC%E5%8F%B7%E7%9A%84%E5%88%86%E6%95%B0"><span class="toc-text">856. 括号的分数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE%E8%A1%A8%E8%BF%B0"><span class="toc-text">题目表述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E9%A2%98%E8%A7%A3"><span class="toc-text">代码题解</span></a></li></ol></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -536,36 +586,40 @@
     }
 </style>
 </div>
-            <h1 id="Why-Blog"><a href="#Why-Blog" class="headerlink" title="Why Blog"></a>Why Blog</h1><h2 id="对博客的理解"><a href="#对博客的理解" class="headerlink" title="对博客的理解"></a>对博客的理解</h2><p>喜欢写Blog的人，会经历三个阶段。</p>
-<blockquote>
-<p>第一阶段，刚接触Blog，觉得很新鲜，试着选择一个免费空间来写。</p>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="856-括号的分数"><a href="#856-括号的分数" class="headerlink" title="856. 括号的分数"></a>856. 括号的分数</h2><h4 id="题目表述"><a href="#题目表述" class="headerlink" title="题目表述"></a>题目表述</h4><blockquote>
+<p>给定一个平衡括号字符串 S，按下述规则计算该字符串的分数：<br>() 得 1 分。<br>AB 得 A + B 分，其中 A 和 B 是平衡括号字符串。<br>(A) 得 2 * A 分，其中 A 是平衡括号字符串。</p>
 </blockquote>
-<blockquote>
-<p>第二阶段，发现免费空间限制太多，就自己购买域名和空间，搭建独立博客。</p>
-</blockquote>
-<blockquote>
-<p>第三阶段，觉得独立博客的管理太麻烦，最好在保留控制权的前提下，让别人来管，自己只负责写文章。</p>
-</blockquote>
-<p>学习知识的过程就是建立模型的过程，博客也只是用来描述模型，所以描述出来的不可能是模型的所有样子，总有不准确和忽略的地方，通过分享博客，互相分享自己建立的知识模型，互相补充。</p>
-<h2 id="关于码阁"><a href="#关于码阁" class="headerlink" title="关于码阁"></a>关于码阁</h2><p><strong>码阁</strong> 是阁主（赵鹤鹏）的个人站。</p>
-<p>到目前为止已经写了<code class="article_number"></code>篇文章， 共<code class="site_word_count"></code>字。</p>
-<p>本站访问人数：<code class="site_uv"></code>人次 ， 访问量：<code class="site_pv"></code>次</p>
-<h2 id="博客平台"><a href="#博客平台" class="headerlink" title="博客平台"></a>博客平台</h2><p>这个博客通过 <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a> 生成，部署在 <a target="_blank" rel="noopener" href="https://pages.github.com/">GitHub Pages</a>主题 <a target="_blank" rel="noopener" href="https://github.com/yelog/hexo-theme-3-hexo">3-hexo</a> 已经在github上开源</p>
-<p><code>3-hexo</code> 主题使用交流可以加 Q群: <a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=e8cf083cc097141eaf323396f1766809b8e90ff00c67bb441898f672892f6904"><img data-ignore border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="3-hexo使用交流" title="3-hexo使用交流"></a></p>
-<p>主要功能：</p>
-<ul>
-<li>搜索支持文章标题、标签(#标签)、作者(@作者)</li>
-<li>pad/手机等移动端适配</li>
-<li>页面全局快捷键 <a target="_blank" rel="noopener" href='http://yelog.org/2017/03/24/3-hexo-shortcuts/'>3-hexo快捷键说明</a></li>
-</ul>
+<p>示例 1<br>输入： “()”<br>输出： 1</p>
+<p>示例 2：<br>输入： “(())”<br>输出： 2</p>
+<p>示例 3：<br>输入： “()()”<br>输出： 2</p>
+<p>示例 4：<br>输入： “(()(()))”<br>输出： 6</p>
+<p>提示：<br>S 是平衡括号字符串，且只含有 ( 和 ) 。<br>2 &lt;= S.length &lt;= 50</p>
+<h4 id="代码题解"><a href="#代码题解" class="headerlink" title="代码题解"></a>代码题解</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    String s;</span><br><span class="line">    <span class="type">int</span> idx ;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">scoreOfParentheses</span><span class="params">(String s)</span> &#123;</span><br><span class="line">      <span class="comment">//使用递归函数，按照常规思维</span></span><br><span class="line">        </span><br><span class="line">        <span class="type">int</span> <span class="variable">ans</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        idx = <span class="number">0</span>;</span><br><span class="line">        <span class="built_in">this</span>.s =s;</span><br><span class="line">        <span class="type">int</span> <span class="variable">lenth</span> <span class="operator">=</span> s.length();</span><br><span class="line">        <span class="keyword">while</span>(idx&lt;lenth)</span><br><span class="line">        &#123;</span><br><span class="line">            ans+=addWho();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//flag =0表示× flag = 1表示+</span></span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">addWho</span><span class="params">()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">ans</span> <span class="operator">=</span><span class="number">1</span>;</span><br><span class="line">       Deque&lt;Character&gt; deque  = <span class="keyword">new</span> <span class="title class_">ArrayDeque</span>&lt;&gt;();</span><br><span class="line">       deque.push(s.charAt(idx));</span><br><span class="line">       idx++;</span><br><span class="line">       <span class="type">boolean</span> <span class="variable">on</span> <span class="operator">=</span><span class="literal">false</span>;</span><br><span class="line">       <span class="keyword">while</span>(!deque.isEmpty())</span><br><span class="line">       &#123;</span><br><span class="line">          <span class="comment">// System.out.println(idx);</span></span><br><span class="line">           <span class="type">char</span> <span class="variable">c</span>  <span class="operator">=</span>s.charAt(idx);</span><br><span class="line">           <span class="keyword">if</span>(!on)</span><br><span class="line">           &#123;</span><br><span class="line">               <span class="keyword">if</span>(c==<span class="string">&#x27;(&#x27;</span>)</span><br><span class="line">               &#123;</span><br><span class="line">                   deque.push(c);</span><br><span class="line">               &#125;</span><br><span class="line">               <span class="keyword">else</span></span><br><span class="line">               &#123;</span><br><span class="line">                   on =<span class="literal">true</span>;</span><br><span class="line">                   deque.poll();</span><br><span class="line">               &#125;</span><br><span class="line">               idx++;</span><br><span class="line">           &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">               <span class="keyword">if</span>(c==<span class="string">&#x27;(&#x27;</span>)</span><br><span class="line">               &#123;</span><br><span class="line">                   ans+=addWho();</span><br><span class="line"></span><br><span class="line">               &#125;</span><br><span class="line">               <span class="keyword">else</span>&#123;</span><br><span class="line">                   deque.poll();</span><br><span class="line">                   ans=ans*<span class="number">2</span>;</span><br><span class="line">                   idx++;</span><br><span class="line">               &#125;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-        </article>
-        
-        <p>
-            <a  class="dashang" onclick="dashangToggle()">赏</a>
-        </p>
-        
-        
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。 </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">💰</a>
+</p>
+
+
+
+
+
+
+    
+
+
+
+
     </div>
     <div class="copyright">
         <p class="footer-entry">
@@ -574,11 +628,11 @@
 <p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
 
     </div>
-</div>
-<div class="full-toc">
-    <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
 <a class="" id="rocket" ></a>
 
+    </div>
 </div>
 
 <div class="hide_box" onclick="dashangToggle()"></div>

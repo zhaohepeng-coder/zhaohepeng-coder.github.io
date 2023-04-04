@@ -4,13 +4,13 @@
     font: 400 15px/1 "Open Sans", "Hiragino Sans GB", sans-serif;
   }
   .nav {
-    width: 492px;
+    width: 498px;
   }
   .nav.fullscreen {
-    margin-left: -492px;
+    margin-left: -498px;
   }
   .nav-left {
-    width: 100px;
+    width: 120px;
   }
   .nav-left .avatar {
     width: 80px;
@@ -20,7 +20,7 @@
     font-size: 16px;
   }
   .nav-right {
-    width: 390px;
+    width: 370px;
   }
   .nav-right .title-list form span #tagswitch:checked +#tagsWitchIcon:after {
     top: 9px;

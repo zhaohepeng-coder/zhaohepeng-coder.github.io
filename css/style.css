@@ -507,7 +507,7 @@
   color: #f00;
 }
 .nav-left {
-  width: 120px;
+  width: 180px;
   height: 100%;
   background: #2a2935;
   box-shadow: inset -15px 0 15px -15px #222;
@@ -1651,7 +1651,7 @@ h2 {
   transition: margin-left 0.5s cubic-bezier(0.77, 0, 0.175, 1);
 }
 .nav.fullscreen {
-  margin-left: -542px;
+  margin-left: -550px;
 }
 .nav:hover .semicircle {
   margin-left: 0;
@@ -1757,13 +1757,13 @@ img.pswp__img {
     font: 400 15px/1 "Open Sans", "Hiragino Sans GB", sans-serif;
   }
   .nav {
-    width: 492px;
+    width: 498px;
   }
   .nav.fullscreen {
-    margin-left: -492px;
+    margin-left: -498px;
   }
   .nav-left {
-    width: 100px;
+    width: 120px;
   }
   .nav-left .avatar {
     width: 80px;
@@ -1773,7 +1773,7 @@ img.pswp__img {
     font-size: 16px;
   }
   .nav-right {
-    width: 390px;
+    width: 370px;
   }
   .nav-right .title-list form span #tagswitch:checked +#tagsWitchIcon:after {
     top: 9px;
